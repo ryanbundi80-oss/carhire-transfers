@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bunvic Tours</title>
+
+  <!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS Animation Library -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+
+<body>
+
+  <!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- Logo -->
+    <div class="logo"><a href="#">Bunvic Tours</a></div>
+    
+    <!-- Mobile Hamburger -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <!-- Nav Links -->
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tour-packages.html">Tour Packages</a></li>
+        <li><a href="car-hire.html">Car Hire</a></li>
+    </ul>
+
+    <!-- CTA Button -->
+    <a href="book-now.html" class="btn-orange">Book Now</a>
+  </div>
+</nav>
+
+
+  <!-- Hero -->
+  <section class="hero cinematic" role="banner" aria-label="Hero: Explore Kenya">
+    <div class="hero-overlay container">
+      <h1> Explore Kenya With Us</h1>
+      <p>Your trusted partner for safari adventures & airport transfers</p>
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary">Book a Tour</a>
+        <a href="#contact" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+<section class="booking" id="booking"> 
+    <h2> Book Your Experience</h2>
+     <p>Choose your service and fill in the details below</p>
+      <!--Tabs--> 
+      <div class="booking-tabs">
+         <button class="tab-btn active" data-tab="transferForm">
+            <i class="fa-solid fa-taxi"></i> Airport Transfers & transport</button> 
+            <button class="tab-btn" data-tab="tourForm">
+                <i class="fa-solid fa-binoculars"></i> Safari & Tours</button> 
+            </div>
+      
+      <!-- Transfer Form -->
+      <form class="booking-form active" id="transferForm" novalidate>
+        <div class="booking-container">
+          <div class="booking-card">
+            <i class="fa-solid fa-calendar"></i>
+            <label for="ArrivalDate">Arrival Date</label>
+            <input type="date" id="ArrivalDate" name="ArrivalDate" required>
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-clock"></i>
+            <label for="ArrivalTime">Arrival Time</label>
+            <input type="time" id="ArrivalTime" name="ArrivalTime" required>
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-plane-departure"></i>
+            <label for="pickupLocation">Pickup Location</label>
+            <select id="pickupLocation" name="pickupLocation" required>
+              <option value="">Select pickup</option>
+              <option>Nairobi Airport</option>
+              <option>Mombasa Airport</option>
+            </select>
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <label for="dropoffLocation">Drop-off Location</label>
+            <select id="dropoffLocation" name="dropoffLocation" required>
+              <option value="">Select dropoff</option>
+              <option>Hotel</option>
+              <option>City Center</option>
+            </select>
+          </div>
+<div class="booking-card">
+  <i class="fa-solid fa-user"></i>
+  <label for="adults">Adults</label>
+  <input type="number" id="adults" name="adults" min="1" value="1">
+</div>
+
+<div class="booking-card">
+  <i class="fa-solid fa-child"></i>
+  <label for="children">Children</label>
+  <input type="number" id="children" name="children" min="0" value="0">
+</div>
+
+<div class="booking-card">
+  <i class="fa-solid fa-route"></i>
+  <label for="tripType">Trip Type</label>
+  <select id="tripType" name="tripType">
+    <option>One Way</option>
+    <option>Return</option>
+  </select>
+</div>
+
+          <div class="booking-card booking-btn">
+            <button type="submit" class="btn btn-primary">Find a Transfer</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Tours Form -->
+      <form class="booking-form" id="tourForm" novalidate>
+        <div class="booking-container">
+          <div class="booking-card">
+            <i class="fa-solid fa-calendar"></i>
+            <label for="fromDate">From</label>
+            <input type="date" id="fromDate" name="fromDate">
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-calendar"></i>
+            <label for="toDate">To</label>
+            <input type="date" id="toDate" name="toDate">
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <label for="location">Location</label>
+            <select id="location" name="location">
+              <option value="all">All Locations</option>
+              <option value="nairobi">Nairobi</option>
+              <option value="mombasa">Mombasa</option>
+              <option value="masai">Masai Mara</option>
+              <option value="diani">Diani Beach</option>
+              <option value="naivasha">Naivasha</option>
+              <option value="tsavo">Tsavo</option>
+            </select>
+          </div>
+          <div class="booking-card">
+            <i class="fa-solid fa-list"></i>
+            <label for="activity">Activity</label>
+            <select id="activity" name="activity">
+              <option value="all">All Activities</option>
+              <option value="watching">Bird Watching</option>
+              <option value="city">City Tours</option>
+              <option value="cultural">Cultural Safari</option>
+              <option value="game">Game Drive</option>
+              <option value="hiking">Hiking</option>
+              <option value="wildlife">Wildlife Safari</option>
+            </select>
+          </div>
+
+          <div class="booking-card booking-btn">
+            <button type="submit" class="btn btn-primary">Search Tours</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Vehicles & Services -->
+  <section id="vehicles" class="vehicles reveal">
+    <div class="vehicles-section container">
+
+      <!-- Background slideshow (absolute, decorative) -->
+        <div class="bg-slideshow" aria-hidden="true">
+         <div class="slide slide1"></div>
+          <div class="slide slide2"></div>
+          <div class="slide slide3"></div>
+        </div>
+
+
+      <header class="section-head">
+        <h2>Our Vehicles & Services</h2>
+        <p>Choose the vehicle that best fits your group and trip style.</p>
+      </header>
+
+
+
+      <!-- Grid -->
+      <div class="vehicle-grid">
+
+        <!-- Card example (repeat) -->
+        <article class="vehicle-card" data-category="mini-vans" data-title="Mini Vans"
+                 data-price="From $45/day" data-models="Toyota Noah • Toyota Voxy • Nissan Serena">
+          <div class="vehicle-media">
+            <img src="images/minivan.jpg" alt="Mini Van" loading="lazy">
+            <span class="badge price">From $45/day</span>
+          </div>
+          <div class="vehicle-body">
+            <div class="vehicle-card-content">
+              <h3 class="vehicle-title">Mini Vans</h3>
+              <p class="vehicle-desc">Seven seater vans good for short and long transfers.</p>
+              <div class="vehicle-chips">
+                <span>7 Seats</span><span>Air Conditioning</span><span>Automatic</span><span>City & Highway</span>
+              </div>
+            </div>
+            <div class="vehicle-actions">
+              
+              <button class="btn btn-primary book-btn" onclick="location.href='car-hire.html#car-hire'">Book Now</button>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- Standard Vans -->
+        <article class="vehicle-card" data-category="standard-vans" data-title="Standard Vans"
+                 data-price="From $65/day" data-models="Toyota Hiace • Nissan Urvan • Mitsubishi Delica">
+          <div class="vehicle-media">
+            <img src="images/standard-van.jpg" alt="Standard Van" loading="lazy">
+            <span class="badge price">From $65/day</span>
+          </div>
+          <div class="vehicle-body">
+            <div class="vehicle-card-content">
+              <h3 class="vehicle-title">Standard Vans</h3>
+              <p class="vehicle-desc">Nine seater vans good for short and long transfers.</p>
+              <div class="vehicle-chips">
+                <span>9 Seats</span><span>Spacious Interior</span><span>Luggage Space</span><span>Group Transport</span>
+              </div>
+            </div>
+            <div class="vehicle-actions">
+
+              <button class="btn btn-primary book-btn" onclick="location.href='car-hire.html#car-hire'">Book Now</button>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- Shuttle Buses -->
+        <article class="vehicle-card" data-category="shuttle-buses" data-title="Shuttle Buses"
+                 data-price="From $120/day" data-models="Toyota Coaster • Isuzu NPR • Mitsubishi Rosa">
+          <div class="vehicle-media">
+            <img src="images/shuttle-bus.jpg" alt="Shuttle Bus" loading="lazy">
+            <span class="badge price">From $120/day</span>
+          </div>
+          <div class="vehicle-body">
+            <div class="vehicle-card-content">
+              <h3 class="vehicle-title">Shuttle Buses</h3>
+              <p class="vehicle-desc">22 seater buses good for short and long transfers.</p>
+              <div class="vehicle-chips">
+                <span>22 Seats</span><span>Professional Driver</span><span>Large Windows</span><span>Group Tours</span>
+              </div>
+            </div>
+            <div class="vehicle-actions">
+
+              <button class="btn btn-primary book-btn" onclick="location.href='car-hire.html#car-hire'">Book Now</button>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- Safari Vehicles -->
+        <article class="vehicle-card" data-category="safari-vehicles" data-title="Safari Vehicles"
+                 data-price="From $140/day" data-models="Toyota Land Cruiser • Land Rover Defender • Nissan Patrol">
+          <div class="vehicle-media">
+            <img src="images/safari-vehicle.jpg" alt="Safari Vehicle" loading="lazy">
+            <span class="badge price">From $140/day</span>
+          </div>
+          <div class="vehicle-body">
+            <div class="vehicle-card-content">
+              <h3 class="vehicle-title">Safari Vehicles</h3>
+              <p class="vehicle-desc">4x4 vehicles perfect for wildlife adventures.</p>
+              <div class="vehicle-chips">
+                <span>4WD</span><span>Pop-up Roof</span><span>Off-road</span><span>Game Ready</span>
+              </div>
+            </div>
+            <div class="vehicle-actions">
+
+              <button class="btn btn-primary book-btn" onclick="location.href='car-hire.html#car-hire'">Book Now</button>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- SUV 4x4 -->
+        <article class="vehicle-card" data-category="suv-4x4" data-title="SUVs & 4x4"
+                 data-price="From $80/day" data-models="Toyota RAV4 • Honda CRV • Nissan X-Trail">
+          <div class="vehicle-media">
+            <img src="images/suv.jpg" alt="SUV 4x4" loading="lazy">
+            <span class="badge price">From $80/day</span>
+          </div>
+          <div class="vehicle-body">
+            <div class="vehicle-card-content">
+              <h3 class="vehicle-title">SUV 4x4 Cars</h3>
+              <p class="vehicle-desc">Modern SUVs for city and light off-road adventures.</p>
+              <div class="vehicle-chips">
+                <span>AWD</span><span>Fuel Efficient</span><span>Modern Features</span><span>City & Safari</span>
+              </div>
+            </div>
+            <div class="vehicle-actions">
+
+              <button class="btn btn-primary book-btn" onclick="location.href='car-hire.html#car-hire'">Book Now</button>
+
+            </div>
+          </div>
+        </article>
+
+      </div> <!-- /.vehicle-grid -->
+    </div> <!-- /.vehicles-section -->
+  </section>
+
+  <!-- Modal -->
+<!-- WHY CHOOSE - ADD AFTER VEHICLES SECTION -->
+<section id="why-choose" class="why-choose container" aria-label="Why Choose Our Vehicle Fleet">
+  <header class="wc-header" data-aos="fade-up">
+    <h2>Why Choose Our Vehicle Fleet?</h2>
+    <p class="subtitle">Professional service with comprehensive coverage and support</p>
+  </header>
+
+  <!-- feature cards (two rows responsive) -->
+  <div class="wc-features" role="list">
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="50" role="listitem">
+      <div class="wc-icon dark">
+        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+      </div>
+      <h3>Safety First</h3>
+      <p>Experienced guides, well-maintained vehicles, and comprehensive insurance coverage.</p>
+    </article>
+
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="100" role="listitem">
+      <div class="wc-icon">
+        <i class="fas fa-bookmark" aria-hidden="true"></i>
+      </div>
+      <h3>Local Guides</h3>
+      <p>Expert local knowledge that creates authentic and enriching safari experiences.</p>
+    </article>
+
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="150" role="listitem">
+      <div class="wc-icon">
+        <i class="fas fa-headset" aria-hidden="true"></i>
+      </div>
+      <h3>24/7 Support</h3>
+      <p>Round-the-clock assistance for peace of mind during your trip.</p>
+    </article>
+
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="200" role="listitem">
+      <div class="wc-icon">
+        <i class="fas fa-award" aria-hidden="true"></i>
+      </div>
+      <h3>10+ Years Experience</h3>
+      <p>A decade of trusted service providing top-rated tours across Kenya.</p>
+    </article>
+
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="250" role="listitem">
+      <div class="wc-icon">
+        <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+      </div>
+      <h3>Best Value</h3>
+      <p>Competitive pricing without compromising comfort or quality.</p>
+    </article>
+
+    <article class="wc-card" data-aos="fade-up" data-aos-delay="300" role="listitem">
+      <div class="wc-icon">
+        <i class="fas fa-recycle" aria-hidden="true"></i>
+      </div>
+      <h3>Eco-Friendly</h3>
+      <p>Committed to sustainable tourism and protecting Kenya’s natural heritage.</p>
+    </article>
+  </div>
+
+  <!-- stats row -->
+  <div class="wc-stats" data-aos="fade-up" data-aos-delay="350" aria-hidden="false">
+    <div class="stat">
+      <strong>50+</strong>
+      <span>Vehicles Available</span>
+    </div>
+    <div class="stat">
+      <strong>15+</strong>
+      <span>Pickup Locations</span>
+    </div>
+    <div class="stat">
+      <strong>24/7</strong>
+      <span>Customer Service</span>
+    </div>
+  </div>
+
+  <div class="wc-cta" data-aos="zoom-in" data-aos-delay="420">
+    <a href="car-hire.html" class="btn btn-primary">Explore Full Fleet</a>
+  </div>
+</section>
+<!-- END WHY CHOOSE -->
+
+
+
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // animation duration in ms
+    once: true      // animate only once
+  });
+</script>
+<!-- ================== CALL TO ACTION SECTION ================== -->
+<section class="cta-section">
+  <div class="cta-overlay">
+    <div class="cta-content">
+      <h2>Book Your Adventure Now</h2>
+      <p>
+        Don’t just dream about Kenya – experience it! 
+        Your unforgettable adventure is just one click away.
+      </p>
+      <div class="cta-buttons">
+        <a href="book-now.html" class="btn btn-primary">Start Booking</a>
+        <a href="tour-packages.html" class="btn btn-outline">Browse Tours</a>
+      </div>
+      <div class="cta-features">
+        <div class="feature-card">
+          <i class="fas fa-calendar-check"></i>
+          <h3>Easy Booking</h3>
+          <p>Simple online booking process with instant confirmation.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-credit-card"></i>
+          <h3>Flexible Payment</h3>
+          <p>Multiple payment options with secure processing.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-headset"></i>
+          <h3>Expert Support</h3>
+          <p>Dedicated team ready to help plan your perfect trip.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--FOOTER SECTION-->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h2 class="logo">Bunvic <span>Tours</span></h2>
+      <p>
+        Your trusted partner for unforgettable Kenyan adventures. 
+        From wildlife safaris to beach getaways, we create memories that last a lifetime.
+      </p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tour-packages.html">Tour Packages</a></li>
+        <li><a href="#">Car Hire</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="tour-packages.html">Wildlife Safaris</a></li>
+        <li><a href="tour-packages.html">Beach Holidays</a></li>
+        <li><a href="tour-packages.html">Cultural Tours</a></li>
+        <li><a href="car-hire.html">Car Rental</a></li>
+        <li><a href="#">Group Tours</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact Info</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+      <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+      <p><i class="fas fa-envelope"></i> info@bunvictours.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Bunvic Tours and Car Hire. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      menuToggle.classList.toggle("open");
+    });
+  });
+</script>
+<script>
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 10) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>

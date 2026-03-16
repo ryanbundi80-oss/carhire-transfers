@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bunvic | Book Now</title>
+  <link rel="stylesheet" href="book-now.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-container nav-inner">
+    <!-- LOGO -->
+    <div class="logo">
+      <a href="index.html"><span>Bunvic</span> Tours</a>
+    </div>
+
+    <!-- HAMBURGER MENU -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="tour-packages.html">Tour Packages</a></li>
+      <li><a href="car-hire.html">Car Hire</a></li>
+    </ul>
+
+    <!-- CTA -->
+    <a href="book-now.html" class="book-now-btn">Book Now</a>
+  </div>
+</nav>
+
+<!-- HAMBURGER TOGGLE SCRIPT -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.classList.toggle("open", isOpen);
+      });
+
+      // Close when a link is clicked
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        });
+      });
+
+      // Close automatically on resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        }
+      });
+    }
+  });
+</script>
+
+<!-- ======= HERO ======= -->
+<section class="booknow-hero" id="hero">
+  <div class="fade-bottom"></div>
+
+  <div class="hero-content">
+    <h1>Book Your Adventure</h1>
+    <p>Ready to explore Kenya? Fill out our booking form and let us create your perfect adventure.</p>
+  </div>
+</section>
+
+<!-- Scroll cue (moved out of <head>) -->
+<a href="#booking" class="scroll-cue" aria-label="Scroll to booking"></a>
+
+<!-- ======= FEATURES ======= -->
+<section class="features">
+  <div class="feature-card">
+    <i class="fa-regular fa-clock"></i>
+    <h3>Quick Process</h3>
+    <p>Complete booking in just 5 minutes.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fa-solid fa-shield-halved"></i>
+    <h3>Secure &amp; Safe</h3>
+    <p>Your information is protected.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fa-solid fa-headset"></i>
+    <h3>Expert Support</h3>
+    <p>24/7 assistance throughout your journey.</p>
+  </div>
+</section>
+
+<section class="steps">
+  <h2>How It Works</h2>
+  <p class="steps-subtitle">Simple steps to book your perfect Kenya adventure</p>
+
+  <div class="step-grid">
+    <div class="step">
+      <div class="circle"><i class="fa-solid fa-map"></i><span>1</span></div>
+      <h4>Choose Your Adventure</h4>
+      <p>Select your preferred tour package or car rental option</p>
+    </div>
+
+    <div class="step">
+      <div class="circle"><i class="fa-solid fa-file-lines"></i><span>2</span></div>
+      <h4>Fill Booking Form</h4>
+      <p>Provide your details and travel preferences</p>
+    </div>
+
+    <div class="step">
+      <div class="circle"><i class="fa-solid fa-envelope-open-text"></i><span>3</span></div>
+      <h4>Receive Confirmation</h4>
+      <p>Get instant confirmation and detailed itinerary</p>
+    </div>
+
+    <div class="step">
+      <div class="circle"><i class="fa-solid fa-credit-card"></i><span>4</span></div>
+      <h4>Make Payment</h4>
+      <p>Secure payment through multiple options</p>
+    </div>
+
+    <div class="step">
+      <div class="circle"><i class="fa-solid fa-mountain-sun"></i><span>5</span></div>
+      <h4>Start Adventure</h4>
+      <p>Begin your unforgettable Kenya experience</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======= BOOKING FORM ======= -->
+<section class="booking" id="booking">
+  <div class="booking-header">
+    <h2>Complete Your Booking</h2>
+    <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+  </div>
+
+  <form id="bookingForm">
+
+    <!-- Booking Type -->
+    <div class="booking-type">
+      <h3>What would you like to book?</h3>
+      <div class="booking-options">
+        <label class="option-card">
+          <input type="radio" name="booking_type" value="tour" checked>
+          <div class="option-content">
+            <i class="fa-solid fa-binoculars"></i>
+            <h4>Tour Package</h4>
+            <p>Guided tours and safari adventures</p>
+          </div>
+        </label>
+
+        <label class="option-card">
+          <input type="radio" name="booking_type" value="car">
+          <div class="option-content">
+            <i class="fa-solid fa-car-side"></i>
+            <h4>Car Hire</h4>
+            <p>Self-drive or chauffeur-driven rentals</p>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Personal Info -->
+    <div class="form-section">
+      <h3>Personal Information</h3>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="first_name">First Name *</label>
+          <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+        </div>
+
+        <div class="form-field">
+          <label for="last_name">Last Name *</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+
+        <div class="form-field">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="country">Country of Residence *</label>
+          <input type="text" id="country" name="country" placeholder="Enter your country" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Size -->
+    <div class="form-section">
+      <h3>Group Size</h3>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="adults">Adults (12+ years)</label>
+          <select id="adults" name="adults" title="Select number of adults" required>
+            <option value="">Select...</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4+">4+</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="children">Children (Under 12)</label>
+          <select id="children" name="children" title="Select number of children">
+            <option value="">Select...</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2+">2+</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tour or Car Specific Fields -->
+    <div id="tourFields" class="toggle-fields active">
+      <div class="form-section">
+        <h3>Tour Details</h3>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label>Select Tour Package</label>
+            <select name="tour_package">
+              <option value="">Choose a tour...</option>
+              <option>Maasai Mara Safari</option>
+              <option>Amboseli Adventure</option>
+              <option>Coastal Getaway</option>
+            </select>
+          </div>
+          <div class="form-field full-width">
+            <label>Accommodation Type</label>
+            <div class="radio-group-inline">
+              <label><input type="radio" name="accommodation" value="Budget" checked> Budget</label>
+              <label><input type="radio" name="accommodation" value="Standard"> Standard</label>
+              <label><input type="radio" name="accommodation" value="Luxury"> Luxury</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="carFields" class="toggle-fields">
+      <div class="form-section">
+        <h3>Vehicle Selection</h3>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label>Select Vehicle Type</label>
+            <select name="vehicle_type">
+              <option value="">Choose a vehicle...</option>
+              <option>SUV</option>
+              <option>Van</option>
+              <option>Luxury Sedan</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Travel Dates -->
+    <div class="form-section">
+      <h3>Travel Dates</h3>
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Start Date *</label>
+          <input type="date" name="start_date" required>
+        </div>
+        <div class="form-field">
+          <label>End Date *</label>
+          <input type="date" name="end_date" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="form-section">
+      <h3>Special Requests or Comments</h3>
+      <textarea name="special_requests" rows="4" placeholder="Tell us about special needs, dietary preferences, or travel notes..."></textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-footer">
+      <label class="checkbox">
+        <input type="checkbox" name="subscribe"> Yes, send me travel tips & offers.
+      </label>
+      <button type="submit" class="btn-orange">Submit Booking Request</button>
+    </div>
+  </form>
+</section>
+
+<!-- ======= FOOTER ======= -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Column 1: Brand -->
+    <div class="footer-col">
+      <h2><span class="brand-green">Bunvic</span> Tours</h2>
+      <p>
+        Your trusted partner for unforgettable Kenyan adventures.
+        From wildlife safaris to beach getaways, we create memories
+        that last a lifetime.
+      </p>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tour-packages.html">Tour Packages</a></li>
+        <li><a href="car-hire.html">Car Hire</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Services -->
+    <div class="footer-col">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="tour-packages.html">Wildlife Safaris</a></li>
+        <li><a href="tour-packages.html">Beach Holidays</a></li>
+        <li><a href="tour-packages.html">Cultural Tours</a></li>
+        <li><a href="car-hire.html">Car Rental</a></li>
+        <li><a href="car-hire.html">Group Tours</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Contact -->
+    <div class="footer-col">
+      <h3>Contact Info</h3>
+      <ul class="contact-info">
+        <li><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</li>
+        <li><i class="fa-solid fa-phone"></i> +254 700 123 456</li>
+        <li><i class="fa-solid fa-envelope"></i> info@bunvictours.com</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Bunvic Tours & Car Hire. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Single JS entry point for booking logic, popup, parallax, etc. -->
+<script src="book-now.js"></script>
+
+</body>
+</html>

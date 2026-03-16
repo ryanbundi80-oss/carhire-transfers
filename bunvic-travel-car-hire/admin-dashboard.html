@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Bunvic Tours</title>
+
+  <style>
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+
+header {
+  background: #005b36;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+header h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+header .header-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+header button {
+  background: #f5821f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+header button:hover {
+  background: #d96b12;
+}
+
+#undoBtn {
+  background: #0b7dda;
+}
+#undoBtn:hover {
+  background: #085f9f;
+}
+
+.container {
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+/* === KPI CARDS === */
+.kpi-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem auto;
+  max-width: 1000px;
+}
+
+.kpi-card {
+  flex: 1 1 200px;
+  background: linear-gradient(135deg, #ffffff, #f3f3f3);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  color: #222;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.kpi-card i {
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.kpi-card span {
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.kpi-card.total { border-left: 6px solid #005b36; }
+.kpi-card.confirmed { border-left: 6px solid #28a745; color: #28a745; }
+.kpi-card.pending { border-left: 6px solid #f0ad4e; color: #f0ad4e; }
+.kpi-card.cancelled { border-left: 6px solid #dc3545; color: #dc3545; }
+
+h2 {
+  margin: 1.5rem 0 1rem;
+  color: #005b36;
+  text-align: center;
+}
+
+.toggle-section {
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.toggle-btn {
+  background: #005b36;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.toggle-btn:hover {
+  background: #f5821f;
+}
+
+.toggle-section.open {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  min-width: 750px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.6rem;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+th {
+  background: #f5821f;
+  color: white;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+.search-bar,
+input[type="date"],
+select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #a31515;
+}
+
+.status-dropdown {
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 0.85rem;
+}
+
+.loading {
+  text-align: center;
+  color: #005b36;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.export-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.export-buttons button {
+  background: #005b36;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.export-buttons button:hover {
+  background: #f5821f;
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  background: #222;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  font-size: 0.9rem;
+  display: none;
+  z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  .kpi-container { flex-direction: column; align-items: stretch; }
+  .kpi-card { text-align: left; }
+}
+  </style>
+
+  <script src="https://kit.fontawesome.com/a2e0b1e6f1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Bunvic Tours — Admin Dashboard</h1>
+    <div class="header-actions">
+      <button id="undoBtn">Undo</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <div id="toast"></div>
+
+  <div class="container">
+
+    <!-- === KPI SUMMARY CARDS === -->
+    <section id="kpi-cards" class="kpi-container">
+      <div class="kpi-card total"><i class="fas fa-database"></i>Total Bookings<span id="totalCount">0</span></div>
+      <div class="kpi-card confirmed"><i class="fas fa-check-circle"></i>Confirmed<span id="confirmedCount">0</span></div>
+      <div class="kpi-card pending"><i class="fas fa-hourglass-half"></i>Pending<span id="pendingCount">0</span></div>
+      <div class="kpi-card cancelled"><i class="fas fa-times-circle"></i>Cancelled<span id="cancelledCount">0</span></div>
+    </section>
+
+    <!-- === CHARTS SECTION === -->
+    <button class="toggle-btn" id="toggleCharts">Show Charts</button>
+    <div id="chartsSection" class="toggle-section">
+      <div class="chart-container">
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="monthlyChart"></canvas>
+      </div>
+    </div>
+
+    <!-- === FILTERS SECTION === -->
+    <button class="toggle-btn" id="toggleFilters">Show Filters</button>
+    <div id="filtersSection" class="toggle-section">
+      <input type="text" id="search" class="search-bar" placeholder="Search by name, email, or phone..." />
+      <div class="controls-row">
+        <label>From: <input type="date" id="startDate" /></label>
+        <label>To: <input type="date" id="endDate" /></label>
+        <select id="filterService">
+          <option value="">All Services</option>
+          <option value="tour">Tour</option>
+          <option value="car">Car Hire</option>
+        </select>
+        <select id="filterStatus">
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <select id="sortOrder">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
+      </div>
+
+      <div class="export-buttons">
+        <button id="exportExcel">Export Excel</button>
+        <button id="exportPDF">Export PDF</button>
+      </div>
+    </div>
+
+    <!-- === BOOKINGS TABLE === -->
+    <h2>All Bookings</h2>
+    <div id="loading" class="loading">Loading bookings...</div>
+    <div class="table-wrapper">
+      <table id="bookingsTable" style="display: none;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Country</th>
+            <th>Service</th>
+            <th>Arrival Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleCharts = document.getElementById("toggleCharts");
+  const chartsSection = document.getElementById("chartsSection");
+  const toggleFilters = document.getElementById("toggleFilters");
+  const filtersSection = document.getElementById("filtersSection");
+
+  toggleCharts.addEventListener("click", () => {
+    chartsSection.classList.toggle("open");
+    toggleCharts.textContent = chartsSection.classList.contains("open")
+      ? "Hide Charts"
+      : "Show Charts";
+  });
+
+  toggleFilters.addEventListener("click", () => {
+    filtersSection.classList.toggle("open");
+    toggleFilters.textContent = filtersSection.classList.contains("open")
+      ? "Hide Filters"
+      : "Show Filters";
+  });
+});
+
+const API_BASE = "http://localhost:5000";
+const token = localStorage.getItem("adminToken");
+if (!token) window.location.href = "admin-login.html";
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("adminToken");
+  window.location.href = "admin-login.html";
+});
+
+const toastEl = document.getElementById("toast");
+function toast(msg, ms = 1800) {
+  toastEl.textContent = msg;
+  toastEl.style.display = "block";
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => (toastEl.style.display = "none"), ms);
+}
+
+let allBookings = [];
+let statusChart, monthlyChart;
+
+// === AUTH FETCH WRAPPER ===
+async function authFetch(url, options = {}) {
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...(options.headers || {}),
+    },
+  });
+
+  if (res.status === 401) {
+    alert("Session expired. Please log in again.");
+    localStorage.removeItem("adminToken");
+    window.location.href = "admin-login.html";
+  }
+
+  return res;
+}
+
+// Optional: use server-side filtering/sorting/pagination
+const USE_SERVER_SIDE = false;
+
+function buildBookingsQuery() {
+  const searchText = document.getElementById("search").value.trim();
+  const filterStatus = document.getElementById("filterStatus").value;
+  const sortOrder = document.getElementById("sortOrder").value;
+
+  const params = new URLSearchParams();
+  if (filterStatus) params.set("status", filterStatus);
+  if (searchText) params.set("q", searchText);
+
+  params.set("sortBy", "id");
+  params.set("order", sortOrder === "oldest" ? "asc" : "desc");
+
+  return params.toString() ? `?${params.toString()}` : "";
+}
+
+// === KPI SUMMARY ===
+async function loadKPISummary() {
+  try {
+    const res = await authFetch(`${API_BASE}/api/bookings/summary`);
+    const data = await res.json();
+
+    document.getElementById("totalCount").textContent = data.total || 0;
+    document.getElementById("confirmedCount").textContent = data.confirmed || 0;
+    document.getElementById("pendingCount").textContent = data.pending || 0;
+    document.getElementById("cancelledCount").textContent = data.cancelled || 0;
+  } catch (err) {
+    console.error("Error loading KPI summary:", err);
+  }
+}
+setInterval(loadKPISummary, 10000);
+
+// === FETCH BOOKINGS ===
+async function fetchBookings() {
+  const loading = document.getElementById("loading");
+  const table = document.getElementById("bookingsTable");
+  loading.style.display = "block";
+  table.style.display = "none";
+
+  try {
+    const query = USE_SERVER_SIDE ? buildBookingsQuery() : "";
+    const res = await authFetch(`${API_BASE}/api/bookings${query}`);
+    const data = await res.json();
+
+    if (!data.success) throw new Error("Failed to fetch bookings");
+
+    allBookings = data.data;
+    renderTable();
+    updateStatusChart();
+    updateMonthlyChart();
+    loadKPISummary();
+
+    loading.style.display = "none";
+    table.style.display = "table";
+  } catch (err) {
+    console.error("Error loading bookings:", err);
+    loading.textContent = "Failed to load bookings.";
+  }
+}
+
+// === RENDER TABLE ===
+function renderTable() {
+  const tbody = document.querySelector("#bookingsTable tbody");
+  tbody.innerHTML = "";
+
+  const searchText = document.getElementById("search").value.toLowerCase();
+  const filterService = document.getElementById("filterService").value;
+  const filterStatus = document.getElementById("filterStatus").value;
+  const sortOrder = document.getElementById("sortOrder").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+
+  let filtered = allBookings.filter((b) => {
+    const matchesSearch =
+      (b.fullName || "").toLowerCase().includes(searchText) ||
+      (b.email || "").toLowerCase().includes(searchText) ||
+      (b.phone || "").toLowerCase().includes(searchText);
+
+    const matchesService = !filterService || b.serviceType === filterService;
+    const matchesStatus = !filterStatus || b.status === filterStatus;
+
+    const bookingDate = b.arrivalDate ? new Date(b.arrivalDate) : null;
+    const inDateRange =
+      (!startDate || (bookingDate && bookingDate >= new Date(startDate))) &&
+      (!endDate || (bookingDate && bookingDate <= new Date(endDate)));
+
+    return matchesSearch && matchesService && matchesStatus && inDateRange;
+  });
+
+  filtered.sort((a, b) =>
+    sortOrder === "newest" ? b.id - a.id : a.id - b.id
+  );
+
+  filtered.forEach((b) => {
+    const safeDate = b.arrivalDate ? String(b.arrivalDate).split("T")[0] : "N/A";
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${b.id}</td>
+      <td>${b.fullName || "—"}</td>
+      <td>${b.email || "—"}</td>
+      <td>${b.phone || "—"}</td>
+      <td>${b.country || "N/A"}</td>
+      <td>${b.serviceType || "N/A"}</td>
+      <td>${safeDate}</td>
+      <td>
+        <select class="status-dropdown" data-id="${b.id}" data-prev="${b.status}">
+          <option value="Pending" ${b.status === "Pending" ? "selected" : ""}>Pending</option>
+          <option value="Confirmed" ${b.status === "Confirmed" ? "selected" : ""}>Confirmed</option>
+          <option value="Cancelled" ${b.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+        </select>
+      </td>
+      <td><button class="delete-btn" data-id="${b.id}">Delete</button></td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// === STATUS CHART ===
+function updateStatusChart() {
+  const counts = { Pending: 0, Confirmed: 0, Cancelled: 0 };
+  allBookings.forEach((b) => {
+    if (counts[b.status] !== undefined) counts[b.status]++;
+  });
+
+  const ctx = document.getElementById("statusChart").getContext("2d");
+  if (statusChart) statusChart.destroy();
+
+  statusChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Pending", "Confirmed", "Cancelled"],
+      datasets: [{
+        data: [counts.Pending, counts.Confirmed, counts.Cancelled],
+        backgroundColor: ["#fbc02d", "#4caf50", "#e53935"],
+      }],
+    },
+    options: {
+      plugins: {
+        title: { display: true, text: "Bookings Summary" },
+        legend: { position: "bottom" },
+      },
+    },
+  });
+}
+
+// === MONTHLY CHART ===
+async function updateMonthlyChart() {
+  try {
+    const res = await authFetch(`${API_BASE}/api/bookings/monthly`);
+    const data = await res.json();
+
+    if (!Array.isArray(data) || data.length === 0) return;
+
+    const labels = data.map((item) => item.month);
+    const counts = data.map((item) => item.total);
+
+    const ctx = document.getElementById("monthlyChart").getContext("2d");
+    if (monthlyChart) monthlyChart.destroy();
+
+    monthlyChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Bookings per Month",
+          data: counts,
+          backgroundColor: "#f5821f",
+        }],
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Bookings" } },
+          x: { title: { display: true, text: "Month" } },
+        },
+        plugins: {
+          title: { display: true, text: "Monthly Bookings Trend (From Database)" },
+          legend: { display: false },
+        },
+      },
+    });
+  } catch (err) {
+    console.error("Error loading monthly chart:", err);
+  }
+}
+
+// === UNDO (Stack endpoint) ===
+document.getElementById("undoBtn").addEventListener("click", async () => {
+  try {
+    const res = await authFetch(`${API_BASE}/api/admin/undo`, { method: "POST" });
+    const data = await res.json();
+
+    if (!data.success) {
+      toast(data.message || "Nothing to undo");
+      return;
+    }
+
+    toast("Undo queued ✅");
+    setTimeout(fetchBookings, 600);
+    setTimeout(loadKPISummary, 700);
+  } catch (err) {
+    console.error(err);
+    toast("Undo failed ❌");
+  }
+});
+
+
+document.addEventListener("change", async (e) => {
+  if (e.target.classList.contains("status-dropdown")) {
+    const newStatus = e.target.value;
+    const id = e.target.dataset.id;
+    const prev = e.target.dataset.prev;
+
+    // optimistic UI update
+    const booking = allBookings.find((b) => b.id == id);
+    if (booking) booking.status = newStatus;
+
+    renderTable();
+    updateStatusChart();
+    loadKPISummary();
+    toast("Update queued…");
+
+    try {
+      const res = await authFetch(`${API_BASE}/api/bookings/${id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        if (booking) booking.status = prev;
+        toast("Failed. Reverted ❌");
+        renderTable();
+        updateStatusChart();
+        loadKPISummary();
+        return;
+      }
+
+      toast("Saved ✅");
+      setTimeout(fetchBookings, 600);
+    } catch (err) {
+      console.error(err);
+      if (booking) booking.status = prev;
+      toast("Network error. Reverted ❌");
+      renderTable();
+      updateStatusChart();
+      loadKPISummary();
+    }
+  }
+});
+
+// === DELETE (Queue aware: 202) ===
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const id = e.target.dataset.id;
+    if (!confirm("Delete this booking?")) return;
+
+    const backup = allBookings.slice();
+    allBookings = allBookings.filter((b) => b.id != id);
+    renderTable();
+    updateStatusChart();
+    loadKPISummary();
+    toast("Delete queued…");
+
+    try {
+      const res = await authFetch(`${API_BASE}/api/bookings/${id}`, { method: "DELETE" });
+      const data = await res.json();
+
+      if (!data.success) {
+        allBookings = backup;
+        toast("Delete failed. Restored ❌");
+        renderTable();
+        updateStatusChart();
+        loadKPISummary();
+        return;
+      }
+
+      toast("Deleted ✅ (Undo available)");
+      setTimeout(fetchBookings, 650);
+      setTimeout(loadKPISummary, 750);
+    } catch (err) {
+      console.error(err);
+      allBookings = backup;
+      toast("Network error. Restored ❌");
+      renderTable();
+      updateStatusChart();
+      loadKPISummary();
+    }
+  }
+});
+
+// === FILTERS ===
+document.querySelectorAll("#search, #filterService, #filterStatus, #sortOrder, #startDate, #endDate")
+  .forEach(el => el.addEventListener("input", () => {
+    if (USE_SERVER_SIDE) fetchBookings();
+    else {
+      renderTable();
+      updateStatusChart();
+    }
+  }));
+
+// === EXPORT BUTTONS ===
+document.getElementById("exportExcel").addEventListener("click", () => {
+  const ws = XLSX.utils.json_to_sheet(allBookings);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Bookings");
+  XLSX.writeFile(wb, "Bunvic_Bookings.xlsx");
+});
+
+document.getElementById("exportPDF").addEventListener("click", () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text("Bunvic Tours - Bookings Report", 14, 15);
+  doc.autoTable({
+    startY: 20,
+    head: [["ID", "Name", "Email", "Phone", "Service", "Date", "Status"]],
+    body: allBookings.map(b => [
+      b.id,
+      b.fullName || "—",
+      b.email || "—",
+      b.phone || "—",
+      b.serviceType || "—",
+      b.arrivalDate ? String(b.arrivalDate).split("T")[0] : "—",
+      b.status || "—"
+    ]),
+  });
+  doc.save("Bunvic_Bookings_Report.pdf");
+});
+
+// === INITIAL FETCH ===
+fetchBookings();
+  </script>
+</body>
+</html>

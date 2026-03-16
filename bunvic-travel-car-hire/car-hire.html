@@ -1,0 +1,293 @@
+<!--  CAR HIRE SECTION -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Hire Services</title>
+      <!-- Base styles -->
+  <link rel="stylesheet" href="css/style.css">
+    <!-- Page-specific styles -->
+  <link rel="stylesheet" href="css/car-hire.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <meta name="description" content="Bunvic Tours Car Hire Services - Affordable car rentals and safari vehicles across Kenya. Explore Kenya at your pace!">
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.classList.toggle("open", isOpen);
+      });
+
+      // Close menu when a link is clicked
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        });
+      });
+
+      // Auto-close on desktop resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        }
+      });
+    }
+  });
+</script>
+
+
+    </head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+    <!-- Logo -->
+    <div class="logo"><a href="index.html">Bunvic Tours</a></div>
+
+    <!-- Hamburger Toggle -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="tour-packages.html">Tour Packages</a></li>
+      <li><a href="car-hire.html">Car Hire</a></li>
+    </ul>
+
+    <!-- CTA Button -->
+    <a href="book-now.html" class="btn-orange">Book Now</a>
+  </div>
+</nav>
+
+
+<section class="car-hire" id="car-hire">
+
+  <!-- Intro -->
+  <div class="car-hire-intro">
+    <h2>Car Hire Services</h2>
+    <p>Explore Kenya at your own pace with our reliable, well-maintained vehicles. From city drives to safari adventures, we have the perfect vehicle for every journey.</p>
+    <div class="hire-highlights">
+      <div class="highlight"><i class="fa-solid fa-car"></i><h3>25+</h3><p>Vehicles Available</p></div>
+      <div class="highlight"><i class="fa-solid fa-shield"></i><h3>100%</h3><p>Fully Insured</p></div>
+      <div class="highlight"><i class="fa-solid fa-headset"></i><h3>24/7</h3><p>Support Available</p></div>
+      <div class="highlight"><i class="fa-solid fa-location-dot"></i><h3>15+</h3><p>Pickup Locations</p></div>
+    </div>
+  </div>
+
+<!-- ======= Vehicle Fleet Cards ======= -->
+<div class="fleet-grid">
+
+  <!-- Mini Van -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">City & Transfers</span>
+    <span class="vehicle-price">$50/day</span>
+    <img src="images/mini-van.jpg" alt="Mini Van">
+    <h3>Mini Vans</h3>
+    <p class="features">
+      <span>7 Seats</span>
+      <span>AC</span>
+      <span>Comfortable</span>
+      <span>Short Transfers</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 2.5L Petrol | <strong>Fuel:</strong> Petrol | <strong>Transmission:</strong> Automatic</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+  <!-- Van -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">Family Van</span>
+    <span class="vehicle-price">$60/day</span>
+    <img src="images/van.jpg" alt="Van">
+    <h3>Vans</h3>
+    <p class="features">
+      <span>9 Seats</span>
+      <span>Spacious</span>
+      <span>Air Conditioning</span>
+      <span>Short & Long Transfers</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 2.7L Diesel | <strong>Fuel:</strong> Diesel | <strong>Transmission:</strong> Automatic</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+  <!-- Shuttle Bus -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">Group Transport</span>
+    <span class="vehicle-price">$120/day</span>
+    <img src="images/shuttle-bus.jpg" alt="Shuttle Bus">
+    <h3>Shuttle Buses</h3>
+    <p class="features">
+      <span>22 Seats</span>
+      <span>Comfort</span>
+      <span>AC</span>
+      <span>Perfect for Groups</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 3.0L Diesel | <strong>Fuel:</strong> Diesel | <strong>Transmission:</strong> Manual</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+  <!-- Land Cruiser -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">Safari Vehicle</span>
+    <span class="vehicle-price">$85/day</span>
+    <img src="images/landcruiser.jpg" alt="Land Cruiser">
+    <h3>Land Cruisers</h3>
+    <p class="features">
+      <span>4WD</span>
+      <span>Pop-up Roof</span>
+      <span>GPS</span>
+      <span>7 Seats</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 4.6L V8 | <strong>Fuel:</strong> Petrol | <strong>Transmission:</strong> Automatic</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+  <!-- Bus -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">Tour Bus</span>
+    <span class="vehicle-price">$140/day</span>
+    <img src="images/bus.jpg" alt="Bus">
+    <h3>Buses</h3>
+    <p class="features">
+      <span>35 Seats</span>
+      <span>Large Windows</span>
+      <span>Luggage Space</span>
+      <span>AC</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 4.0L Diesel | <strong>Fuel:</strong> Diesel | <strong>Transmission:</strong> Manual</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+  <!-- SUV 4x4 -->
+  <div class="vehicle-card">
+    <span class="vehicle-tag">Luxury SUV</span>
+    <span class="vehicle-price">$95/day</span>
+    <img src="images/suv.jpg" alt="SUV 4x4">
+    <h3>SUV 4x4 Cars</h3>
+    <p class="features">
+      <span>4WD</span>
+      <span>Automatic</span>
+      <span>Leather Seats</span>
+      <span>Fuel Efficient</span>
+    </p>
+    <p class="specs"><strong>Engine:</strong> 2.8L Petrol | <strong>Fuel:</strong> Petrol | <strong>Transmission:</strong> Automatic</p>
+    <button class="rent-btn">Rent This Vehicle</button>
+  </div>
+
+</div>
+
+  <!-- Rental Features -->
+  <div class="rental-features">
+    <h2>Rental Features & Benefits</h2>
+    <p>Everything you need for a worry-free car rental experience in Kenya</p>
+    <div class="features-grid">
+      <div class="feature"><i class="fa-solid fa-shield"></i><h4>Comprehensive Insurance</h4><p>Full coverage including collision damage waiver and third-party liability insurance.</p></div>
+      <div class="feature"><i class="fa-solid fa-wrench"></i><h4>24/7 Roadside Assistance</h4><p>Round-the-clock emergency breakdown service and replacement vehicle if needed.</p></div>
+      <div class="feature"><i class="fa-solid fa-map"></i><h4>GPS Navigation Included</h4><p>All vehicles include GPS navigation with Kenya maps and points of interest.</p></div>
+      <div class="feature"><i class="fa-solid fa-gas-pump"></i><h4>Flexible Fuel Policy</h4><p>Choose between full-to-full or pre-purchase fuel options.</p></div>
+      <div class="feature"><i class="fa-solid fa-user"></i><h4>Professional Drivers Available</h4><p>Optional local drivers who know the terrain and can guide you.</p></div>
+      <div class="feature"><i class="fa-solid fa-calendar"></i><h4>Flexible Rental Periods</h4><p>From hourly rentals to long-term monthly packages.</p></div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="why-choose">
+    <h2>Why Choose Our Car Hire Service?</h2>
+    <p>Over 10 years of experience providing reliable transportation solutions</p>
+    <div class="choose-grid">
+      <div class="choose"><i class="fa-solid fa-certificate"></i><h4>Licensed</h4><p>Fully licensed by Kenya tourism board</p></div>
+      <div class="choose"><i class="fa-solid fa-tags"></i><h4>Best Rates</h4><p>Competitive pricing with no hidden fees</p></div>
+      <div class="choose"><i class="fa-solid fa-clock"></i><h4>Quick Service</h4><p>Fast pickup and return process</p></div>
+      <div class="choose"><i class="fa-solid fa-headset"></i><h4>Support</h4><p>Dedicated customer service team</p></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="car-hire-cta">
+    <h2>Start Your Journey Today</h2>
+    <p>Freedom to explore Kenya at your own pace. Book your perfect vehicle now and embark on an unforgettable self-drive adventure.</p>
+    <div class="cta-buttons">
+      <a href="#booking" class="btn-orange">Book Vehicle Now</a>
+
+    </div>
+    <div class="cta-features">
+      <div><i class="fa-solid fa-clock"></i><p>Quick Booking<br><small>Reserve in 3 minutes online</small></p></div>
+      <div><i class="fa-solid fa-phone"></i><p>Instant Confirmation<br><small>Immediate booking details</small></p></div>
+      <div><i class="fa-solid fa-map"></i><p>Flexible Pickup<br><small>15+ pickup locations</small></p></div>
+    </div>
+  <div class="car-hire-contact">
+    <h3>Contact Our Car Hire Team</h3>
+    <p>📞 Call: +254 700 123 456 | ✉ Email: rentals@bunvictours.com | 💬 WhatsApp: +254 700 123 456</p>
+  </div>
+  </div>
+</section>
+<!-- ================== FOOTER SECTION ================== -->
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- About Section -->
+    <div class="footer-about">
+      <h2 class="logo">Bunvic <span>Tours</span></h2>
+      <p>
+        Your trusted partner for unforgettable Kenyan adventures. 
+        From wildlife safaris to beach getaways, we create memories that last a lifetime.
+      </p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tour-packages.html">Tour Packages</a></li>
+        <li><a href="car-hire.html">Car Hire</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-links">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="tour-packages.html">Wildlife Safaris</a></li>
+        <li><a href="tour-packages.html">Beach Holidays</a></li>
+        <li><a href="tour-packages.html">Cultural Tours</a></li>
+        <li><a href="car-hire.html">Car Rental</a></li>
+        <li><a href="car-hire.html">Group Tours</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-contact">
+      <h3>Contact Info</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+      <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+      <p><i class="fas fa-envelope"></i> info@bunvictours.com</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 Bunvic Tours and Car Hire. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
+

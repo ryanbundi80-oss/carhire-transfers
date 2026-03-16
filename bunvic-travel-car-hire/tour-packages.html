@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tour Packages – Bunvic Tours</title>
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="css/tours.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.classList.toggle("open", isOpen);
+      });
+
+      // Close on link click
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        });
+      });
+
+      // Auto-close on desktop resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- Filter drawer script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle  = document.querySelector('.filter-toggle');
+      const panel   = document.getElementById('filterPanel');
+      const overlay = document.querySelector('.drawer-overlay');
+      const closeBtn = document.querySelector('.filter-close');
+
+      if (!toggle || !panel || !overlay) return;
+
+      function closeDrawer() {
+        panel.classList.remove('open');
+        overlay.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+        toggle.setAttribute('aria-expanded', 'false');
+        panel.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('hidden', '');
+      }
+
+      function openDrawer() {
+        panel.classList.add('open');
+        overlay.classList.add('show');
+        document.body.classList.add('no-scroll');
+        toggle.setAttribute('aria-expanded', 'true');
+        panel.setAttribute('aria-hidden', 'false');
+        overlay.removeAttribute('hidden');
+      }
+
+      toggle.addEventListener('click', () => {
+        panel.classList.contains('open') ? closeDrawer() : openDrawer();
+      });
+      overlay.addEventListener('click', closeDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+      // Auto-close on resize to desktop
+      const mq = window.matchMedia('(min-width: 901px)');
+      mq.addEventListener('change', e => { if (e.matches) closeDrawer(); });
+    });
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.querySelectorAll(".tours-filter input[type='checkbox']");
+  const tourCards = document.querySelectorAll(".tour-card");
+
+  filters.forEach(filter => {
+    filter.addEventListener("change", () => {
+      applyFilters();
+    });
+  });
+
+  function applyFilters() {
+    const activeFilters = {
+      location: [],
+      feature: [],
+      duration: []
+    };
+
+    // Collect selected filters
+    filters.forEach(filter => {
+      if (filter.checked) {
+        if (filter.parentElement.parentElement.querySelector("h4").textContent === "Location") {
+          activeFilters.location.push(filter.value);
+        }
+        if (filter.parentElement.parentElement.querySelector("h4").textContent === "Features") {
+          activeFilters.feature.push(filter.value);
+        }
+        if (filter.parentElement.parentElement.querySelector("h4").textContent === "Duration") {
+          activeFilters.duration.push(filter.value);
+        }
+      }
+    });
+
+    // Show/hide cards
+    tourCards.forEach(card => {
+      const matchesLocation = activeFilters.location.length === 0 || activeFilters.location.includes(card.dataset.location);
+      const matchesFeature = activeFilters.feature.length === 0 || activeFilters.feature.some(f => card.dataset.feature.includes(f));
+      const matchesDuration = activeFilters.duration.length === 0 || activeFilters.duration.includes(card.dataset.duration);
+
+      if (matchesLocation && matchesFeature && matchesDuration) {
+        card.style.display = "flex"; // show
+      } else {
+        card.style.display = "none"; // hide
+      }
+    });
+  }
+});
+</script>
+
+</head>
+<body class="page-tours">
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- Logo -->
+    <div class="logo"><a href="index.html">Bunvic Tours</a></div>
+
+    <!-- Hamburger Toggle -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="tour-packages.html">Tour Packages</a></li>
+      <li><a href="car-hire.html">Car Hire</a></li>
+    </ul>
+
+    <!-- CTA Button -->
+    <a href="book-now.html" class="btn-orange">Book Now</a>
+  </div>
+</nav>
+
+  <!-- HERO -->
+  <section class="packages-hero" aria-labelledby="packages-hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" autoplay muted playsinline loop preload="auto"
+             poster="images/hero-tours-poster.jpg">
+        <source src="video/safari-hero.mp4" type="video/mp4">
+      </video>
+      <img class="hero-image" src="images/hero-tours-poster.jpg" alt="Safari Landscape" />
+      <div class="hero-vignette"></div>
+      <div class="hero-gradient"></div>
+    </div>
+
+    <div class="hero-inner container">
+      <h1 id="packages-hero-title">
+        Explore Kenya <span>With Us</span>
+      </h1>
+      <p class="hero-sub">
+        Hand-crafted safaris, beach escapes, city tours & transfers — designed around you.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#packages" class="btn-orange btn-lg">Browse Packages</a>
+        <a href="book-now.html" class="btn-outline btn-lg">Customize My Trip</a>
+      </div>
+
+      <ul class="trust-chips" aria-label="Why travel with us">
+        <li>Licensed Tour Operator</li>
+        <li>5★ Guest Reviews</li>
+        <li>Secure Payments</li>
+      </ul>
+    </div>
+
+    <button class="scroll-cue" aria-label="Scroll down"></button>
+  </section>
+  <!-- /HERO -->
+
+ <!-- TOURS SECTION -->
+<section class="tours-section container" id="packages">
+
+  <!-- Mobile toggle + overlay -->
+  <button class="filter-toggle" aria-expanded="false" aria-controls="filterPanel">
+    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
+      <rect width="20" height="2" y="0" rx="1"></rect>
+      <rect width="20" height="2" y="6" rx="1"></rect>
+      <rect width="20" height="2" y="12" rx="1"></rect>
+    </svg>
+    Filters <span class="dot"></span>
+  </button>
+  <div class="drawer-overlay" hidden></div>
+
+  <div class="tours-layout">
+    <!-- Sidebar Filter -->
+    <aside class="tours-filter" id="filterPanel" aria-hidden="true">
+      <button class="filter-close" aria-label="Close filters">×</button>
+
+      <h3>Filter Tours</h3>
+
+      <div class="filter-group">
+        <label for="sort">Sort By</label>
+        <select id="sort">
+          <option value="popularity">Popularity</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="duration">Duration</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <h4>Location</h4>
+        <label><input type="checkbox" value="maasai"> Maasai Mara</label>
+        <label><input type="checkbox" value="amboseli"> Amboseli</label>
+        <label><input type="checkbox" value="diani"> Diani Beach</label>
+        <label><input type="checkbox" value="nakuru"> Lake Nakuru</label>
+        <label><input type="checkbox" value="tsavo"> Tsavo</label>
+        <label><input type="checkbox" value="samburu"> Samburu</label>
+        <label><input type="checkbox" value="kenya"> Mount Kenya</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Features</h4>
+        <label><input type="checkbox" value="bigfive"> Big Five</label>
+        <label><input type="checkbox" value="migration"> Migration</label>
+        <label><input type="checkbox" value="beach"> Beach</label>
+        <label><input type="checkbox" value="cultural"> Cultural</label>
+        <label><input type="checkbox" value="mountain"> Mountain Climbing</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Duration</h4>
+        <label><input type="checkbox" value="1"> 1 Day</label>
+        <label><input type="checkbox" value="2"> 2 Days</label>
+        <label><input type="checkbox" value="3"> 3 Days</label>
+        <label><input type="checkbox" value="5"> 5 Days</label>
+        <label><input type="checkbox" value="7"> 7 Days</label>
+      </div>
+    </aside>
+
+    <!-- Tours Grid -->
+    <div class="tours-list">
+      <h2 class="section-title">Available Tours</h2>
+      <p class="section-subtitle">Hand-picked experiences for every traveler</p>
+
+      <div class="tours-grid">
+        <!-- Tour cards go here -->
+      
+        <!-- Maasai Mara -->
+        <div class="tour-card" data-location="maasai" data-feature="bigfive migration" data-duration="3">
+          <div class="tour-img">
+            <img src="images/maasai-mara.jpg" alt="Maasai Mara Migration">
+            <span class="badge popular">Popular</span>
+            <span class="badge featured">Featured</span>
+          </div>
+          <div class="tour-info">
+            <h3>Maasai Mara Great Migration Safari</h3>
+            <p>Witness millions of wildebeest cross the Mara River in this world-famous spectacle.</p>
+            <div class="tags"><span>Big Five</span><span>Migration</span></div>
+            <div class="tour-meta"><span>📍 Maasai Mara</span><span>⏳ 3 Days</span></div>
+            <div class="tour-footer"><div class="price">$450</div><a href="masai-mara.html" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Amboseli -->
+        <div class="tour-card" data-location="amboseli" data-feature="elephants scenicviews" data-duration="2">
+          <div class="tour-img">
+            <img src="images/amboseli.jpg" alt="Amboseli Safari">
+            <span class="badge featured">Featured</span>
+          </div>
+          <div class="tour-info">
+            <h3>Amboseli Elephant Paradise</h3>
+            <p>Get close to elephants with Mount Kilimanjaro as the backdrop.</p>
+            <div class="tags"><span>Elephants</span><span>Scenic Views</span></div>
+            <div class="tour-meta"><span>📍 Amboseli</span><span>⏳ 2 Days</span></div>
+            <div class="tour-footer"><div class="price">$320</div><a href="amboseli.html" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Diani -->
+        <div class="tour-card" data-location="diani" data-feature="beach relaxation" data-duration="5">
+          <div class="tour-img">
+            <img src="images/diani.jpg" alt="Diani Beach">
+            <span class="badge popular">Popular</span>
+          </div>
+          <div class="tour-info">
+            <h3>Diani Beach Paradise Escape</h3>
+            <p>Relax on Kenya’s most beautiful beach with crystal clear waters.</p>
+            <div class="tags"><span>Beach</span><span>Relaxation</span></div>
+            <div class="tour-meta"><span>📍 Diani</span><span>⏳ 5 Days</span></div>
+            <div class="tour-footer"><div class="price">$380</div><a href="#" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Lake Nakuru -->
+        <div class="tour-card" data-location="nakuru" data-feature="flamingos photography" data-duration="2">
+          <div class="tour-img">
+            <img src="images/nakuru.jpg" alt="Lake Nakuru">
+          </div>
+          <div class="tour-info">
+            <h3>Lake Nakuru Flamingo Spectacle</h3>
+            <p>Marvel at millions of pink flamingos creating a stunning natural spectacle.</p>
+            <div class="tags"><span>Flamingos</span><span>Photography</span></div>
+            <div class="tour-meta"><span>📍 Nakuru</span><span>⏳ 2 Days</span></div>
+            <div class="tour-footer"><div class="price">$280</div><a href="#" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Tsavo -->
+        <div class="tour-card" data-location="tsavo" data-feature="red elephants wildlife" data-duration="4">
+          <div class="tour-img">
+            <img src="images/tsavo.jpg" alt="Tsavo Safari">
+          </div>
+          <div class="tour-info">
+            <h3>Tsavo East & West Safari</h3>
+            <p>Explore Kenya’s largest park, home to the famous red elephants.</p>
+            <div class="tags"><span>Red Elephants</span><span>Wildlife</span></div>
+            <div class="tour-meta"><span>📍 Tsavo</span><span>⏳ 4 Days</span></div>
+            <div class="tour-footer"><div class="price">$420</div><a href="#" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Samburu -->
+        <div class="tour-card" data-location="samburu" data-feature="cultural community" data-duration="4">
+          <div class="tour-img">
+            <img src="images/samburu.jpg" alt="Samburu Culture">
+          </div>
+          <div class="tour-info">
+            <h3>Samburu Cultural Immersion</h3>
+            <p>Experience the rich traditions and lifestyle of the Samburu people.</p>
+            <div class="tags"><span>Cultural</span><span>Community</span></div>
+            <div class="tour-meta"><span>📍 Samburu</span><span>⏳ 4 Days</span></div>
+            <div class="tour-footer"><div class="price">$395</div><a href="#" class="btn-orange">View</a></div>
+          </div>
+        </div>
+
+        <!-- Mount Kenya -->
+        <div class="tour-card" data-location="kenya" data-feature="mountain climbing adventure" data-duration="7">
+          <div class="tour-img">
+            <img src="images/mt-kenya.jpg" alt="Mount Kenya">
+            <span class="badge featured">Featured</span>
+          </div>
+          <div class="tour-info">
+            <h3>Mount Kenya Climbing Adventure</h3>
+            <p>Challenge yourself with a climb to Africa’s second highest peak.</p>
+            <div class="tags"><span>Mountain</span><span>Adventure</span></div>
+            <div class="tour-meta"><span>📍 Mount Kenya</span><span>⏳ 7 Days</span></div>
+            <div class="tour-footer"><div class="price">$780</div><a href="#" class="btn-orange">View</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Tour badges moved inside tours-list -->
+      <div class="tour-badges">
+        <div class="badge-circle">
+          <i class="fa-solid fa-percent"></i>
+          <p>30% Off</p>
+        </div>
+        <div class="badge-circle">
+          <i class="fa-solid fa-users"></i>
+          <p>1000+ Travelers</p>
+        </div>
+        <div class="badge-circle">
+          <i class="fa-solid fa-hotel"></i>
+          <p>Luxury Stays</p>
+        </div>
+        <div class="badge-circle">
+          <i class="fa-solid fa-headset"></i>
+          <p>24/7 Support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS MAP SECTION -->
+<section class="destinations-section container">
+  <div class="dest-header">
+    <h2><i class="fa-solid fa-location-dot"></i> Explore Our Destinations</h2>
+    <p>Discover Kenya’s incredible diversity through our destinations map,</p>
+    <p>use the map as a guide, tell us where you are and where you want to go</p>
+    <p>JUST PRESS THE "CONTACT US" BUTTON and we will be there</p>
+    
+    <!-- View in Google Maps button -->
+    <a href="https://www.google.com/maps/place/Kenya/@-4.559744,37.763381,10z/data=!4m6!3m5!1s0x182780d08350900f:0x403b0eb0a1976dd9!8m2!3d-0.023559!4d37.906193!16zL20vMDE5cmc1?hl=en"
+       target="_blank" class="map-btn">
+       <i class="fa-solid fa-map"></i> View in Google Maps
+    </a>
+  </div>
+</section>
+
+  <!-- Map Embed -->
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15951218.027786236!2d29.0!3d0.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182780d08350900f%3A0x403b0eb0a1976dd9!2sKenya!5e0!3m2!1sen!2ske!4v1700000000000"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+<!-- Contact Buttons -->
+<div class="contact-btns">
+  <a href="https://wa.me/2547XXXXXXXX?text=Hi%20Bunvic%20Tours!%20I%20would%20like%20to%20book%20a%20tour%20and%20share%20my%20location."
+     target="_blank" class="btn whatsapp-btn">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+  </a>
+
+  <a href="contact.html" class="btn contact-btn">
+    <i class="fa-solid fa-envelope"></i> Contact Us
+  </a>
+</div>
+
+</section>
+
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Your Next Adventure Awaits 🌍</h2>
+    <p>
+      Discover breathtaking destinations across Kenya. Choose your journey today and let Bunvic Tours create unforgettable memories for you. 
+    </p>
+    <div class="cta-buttons">
+      <a href="#booking" class="btn btn-primary">Book Your Adventure</a>
+      <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="cta-features">
+    <div class="feature-card">
+      <i class="fa-solid fa-bolt"></i>
+      <h3>Quick Response</h3>
+      <p>Instant quotes and confirmations within 24 hours.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-sliders"></i>
+      <h3>Customizable Tours</h3>
+      <p>Tailor any tour to match your preferences and budget.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-users"></i>
+      <h3>Trusted Guides</h3>
+      <p>Experienced, friendly guides to make your trip special.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-shield-heart"></i>
+      <h3>Guaranteed Quality</h3>
+      <p>100% satisfaction or your money back — guaranteed.</p>
+    </div>
+  </div>
+</section>
+
+  <script src="js/tours-hero.js"></script>
+  <footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Brand & About -->
+    <div class="footer-col">
+      <h3 class="footer-logo">Bunvic Tours</h3>
+      <p>
+        Your trusted partner for unforgettable Kenyan adventures. From wildlife safaris to beach getaways, 
+        we create memories that last a lifetime.
+      </p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tour-packages.html">Tour Packages</a></li>
+        <li><a href="car-hire.html">Car Hire</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="tour-packages.html">Wildlife Safaris</a></li>
+        <li><a href="tour-packages.html">Beach Holidays</a></li>
+        <li><a href="tour-packages.html">Cultural Tours</a></li>
+        <li><a href="car-hire.html">Car Rental</a></li>
+        <li><a href="#">Group Tours</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+        <li><i class="fas fa-phone-alt"></i> +254 700 123 456</li>
+        <li><i class="fas fa-envelope"></i> info@bunvictours.com</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 Bunvic Tours and Car Hire. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
