@@ -15,7 +15,6 @@
       margin: 0;
       color: #222;
     }
-
     .login-box {
       background: white;
       padding: 2rem 2.5rem;
@@ -26,12 +25,7 @@
       text-align: center;
       animation: fadeIn 0.6s ease-out;
     }
-
-    h2 {
-      color: #005b36;
-      margin-bottom: 1.2rem;
-    }
-
+    h2 { color: #005b36; margin-bottom: 1.2rem; }
     input {
       width: 100%;
       padding: 0.7rem;
@@ -39,8 +33,8 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
+      box-sizing: border-box;
     }
-
     button {
       width: 100%;
       background: #f5821f;
@@ -52,17 +46,8 @@
       font-size: 1rem;
       transition: background 0.3s ease;
     }
-
-    button:hover {
-      background: #d96b12;
-    }
-
-    .error {
-      color: #c62828;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
-
+    button:hover { background: #d96b12; }
+    .error { color: #c62828; margin-top: 0.5rem; font-size: 0.9rem; }
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(-10px);}
       to {opacity: 1; transform: translateY(0);}
@@ -77,19 +62,17 @@
     <button id="loginBtn">Login</button>
     <p class="error" id="errorMsg"></p>
   </div>
-
   <script>
-    
     if (localStorage.getItem("adminToken")) {
       window.location.href = "admin-dashboard.html";
     }
 
-    const loginBtn = document.getElementById("loginBtn");
-    const errorMsg = document.getElementById("errorMsg");
+    const API_BASE = "";
 
-    loginBtn.addEventListener("click", async () => {
+    document.getElementById("loginBtn").addEventListener("click", async () => {
       const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
 
       if (!username || !password) {
         errorMsg.textContent = "Please enter both username and password.";
@@ -97,14 +80,12 @@
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/admin/login", {
+        const res = await fetch(`${API_BASE}/api/admin/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         });
-
         const result = await res.json();
-
         if (result.success) {
           localStorage.setItem("adminToken", result.token);
           window.location.href = "admin-dashboard.html";
