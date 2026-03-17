@@ -254,7 +254,7 @@ app.get("/api/bookings/monthly", (req, res) => {
 });
 
 // ===== FALLBACK =====
-app.get("*", (req, res) => {
+app.get("/{*path}", (req, res) => {
   res.sendFile(path.join(__dirname, "bunvic-travel-car-hire", "index.html"));
 });
 
