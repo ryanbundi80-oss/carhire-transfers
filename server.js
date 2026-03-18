@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') dotenv.config();
 const app = express();
 
 const {
