@@ -7,30 +7,20 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 if (process.env.NODE_ENV !== 'production') dotenv.config();
-const app = express();
 
-const {
-  DB_HOST,
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
-  ADMIN_USER,
-  ADMIN_PASS,
-  JWT_SECRET,
-  JWT_EXPIRES_IN,
-  PORT = 5000,
-} = process.env;
+const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
 // ===== MySQL Pool =====
 const db = mysql.createPool({
-  host: DB_HOST,
+  host: process.env.DB_HOST,
   port: process.env.DB_PORT || 3306,
-  user: DB_USER,
-  password: DB_PASS,
-  database: DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   ssl: { rejectUnauthorized: false },
   waitForConnections: true,
   connectionLimit: 10,
@@ -41,20 +31,20 @@ db.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err);
   } else {
-    console.log("✅ Connected to MySQL database:", DB_NAME);
+    console.log("✅ Connected to MySQL database:", process.env.DB_NAME);
     connection.release();
   }
 });
 
-// ===== Static Files — serve frontend =====
+// ===== Static Files =====
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "bunvic-travel-car-hire")));
 
 // ===== JWT Helpers =====
 function signToken(payload) {
-  if (!JWT_SECRET) throw new Error("Missing JWT_SECRET");
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN || "2h" });
+  if (!process.env.JWT_SECRET) throw new Error("Missing JWT_SECRET");
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || "2h" });
 }
 
 function authMiddleware(req, res, next) {
@@ -62,7 +52,7 @@ function authMiddleware(req, res, next) {
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
   if (!token) return res.status(401).json({ success: false, message: "Missing token" });
   try {
-    req.user = jwt.verify(token, JWT_SECRET);
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch {
     return res.status(401).json({ success: false, message: "Invalid or expired token" });
@@ -102,7 +92,7 @@ const undoStack = new Stack(100);
 // ===== ADMIN LOGIN =====
 app.post("/api/admin/login", (req, res) => {
   const { username, password } = req.body;
-  if (username === ADMIN_USER && password === ADMIN_PASS) {
+  if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
     const token = signToken({ role: "admin", username });
     return res.status(200).json({ success: true, message: "Login successful", token, redirect: "/admin-dashboard.html" });
   }
